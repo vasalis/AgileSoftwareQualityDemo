@@ -18,7 +18,7 @@ namespace AwesomeAppUnitTests
 
             var lResult = lController.Get();
 
-            Assert.AreEqual(lResult.ToList().Count, 5);            
+            Assert.AreEqual(6, lResult.ToList().Count);            
         }
     }
 }
