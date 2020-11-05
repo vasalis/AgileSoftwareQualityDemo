@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,6 +47,25 @@ namespace AwesomeApp
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private Container GetContainer(IServiceProvider options)
+        {
+            var lConnectionString = Environment.GetEnvironmentVariable("CosmosConnectionString");
+            var lCosmosDbName = Environment.GetEnvironmentVariable("CosmosDbName");
+            var lCosmosDbContainerName = Environment.GetEnvironmentVariable("CosmosDbContainerName");
+            var lCosmosDbPartionKey = Environment.GetEnvironmentVariable("CosmosDbPartitionKey");
+
+            var lClient = new CosmosClient(lConnectionString, new CosmosClientOptions
+            {
+                ConnectionMode = ConnectionMode.Direct
+            });
+
+            lClient.CreateDatabaseIfNotExistsAsync(lCosmosDbName).Wait();
+            var lDb = lClient.GetDatabase(lCosmosDbName);
+            lDb.CreateContainerIfNotExistsAsync(lCosmosDbContainerName, lCosmosDbPartionKey).Wait();
+
+            return lDb.GetContainer(lCosmosDbContainerName);
         }
     }
 }
