@@ -32,7 +32,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Create Release
       working-directory: ${{env.workDir}}
-      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+      run: dotnet publish -c Release -o 'myapp'
     
     # Deploy to Azure Web apps
     - name: 'Run Azure webapp deploy action using publish profile credentials'      
