@@ -94,13 +94,6 @@ namespace AwesomeApp.Controllers
         [HttpPost]
         public async Task Post([FromBody] string value)
         {
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    StudentEntity lN = new StudentEntity();
-            //    lN.FirstName = $"First name {i}";
-            //    lN.LastName = $"Last name {i}";
-            //}
-
             var lStudent = JsonConvert.DeserializeObject<StudentEntity>(value);
 
             await _myDb.UpsertItemAsync(lStudent);

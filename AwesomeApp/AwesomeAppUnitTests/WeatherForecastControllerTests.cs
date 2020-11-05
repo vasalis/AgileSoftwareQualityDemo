@@ -11,6 +11,9 @@ namespace AwesomeAppUnitTests
         {
         }
 
+        /// <summary>
+        /// This is a Unit test
+        /// </summary>
         [Test]
         public void TestGet()
         {

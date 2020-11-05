@@ -27,6 +27,7 @@ namespace AwesomeApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<Container>(GetContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +42,7 @@ namespace AwesomeApp
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {
@@ -51,10 +52,10 @@ namespace AwesomeApp
 
         private Container GetContainer(IServiceProvider options)
         {
-            var lConnectionString = Environment.GetEnvironmentVariable("CosmosConnectionString");
-            var lCosmosDbName = Environment.GetEnvironmentVariable("CosmosDbName");
-            var lCosmosDbContainerName = Environment.GetEnvironmentVariable("CosmosDbContainerName");
-            var lCosmosDbPartionKey = Environment.GetEnvironmentVariable("CosmosDbPartitionKey");
+            var lConnectionString = Configuration["CosmosDb:CosmosConnectionString"];
+            var lCosmosDbName = Configuration["CosmosDb:CosmosDbName"]; 
+            var lCosmosDbContainerName = Configuration["CosmosDb:CosmosDbContainerName"]; 
+            var lCosmosDbPartionKey = Configuration["CosmosDb:CosmosDbPartitionKey"];
 
             var lClient = new CosmosClient(lConnectionString, new CosmosClientOptions
             {
