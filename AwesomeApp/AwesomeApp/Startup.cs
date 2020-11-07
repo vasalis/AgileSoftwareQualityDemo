@@ -53,7 +53,7 @@ namespace AwesomeApp
 
         private Container GetContainer(IServiceProvider options)
         {
-            var lConnectionString = Configuration["CosmosDb:CosmosConnectionString_WrongValue"];
+            var lConnectionString = Configuration["CosmosDb:CosmosConnectionString"];
             var lCosmosDbName = Configuration["CosmosDb:CosmosDbName"]; 
             var lCosmosDbContainerName = Configuration["CosmosDb:CosmosDbContainerName"]; 
             var lCosmosDbPartionKey = Configuration["CosmosDb:CosmosDbPartitionKey"];
