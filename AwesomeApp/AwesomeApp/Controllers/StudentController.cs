@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,8 @@ namespace AwesomeApp.Controllers
         {
             try
             {
+                this.DoCompute();
+
                 List<StudentEntity> lResults = new List<StudentEntity>();
 
                 QueryDefinition queryDefinition = new QueryDefinition("select * from Students");
@@ -62,9 +65,6 @@ namespace AwesomeApp.Controllers
         {
             try
             {
-
-                this.DoCompute();
-
                 List<StudentEntity> lResults = new List<StudentEntity>();
 
                 QueryDefinition queryDefinition = new QueryDefinition($"select * from Students");
@@ -104,11 +104,7 @@ namespace AwesomeApp.Controllers
 
         private void DoCompute()
         {
-            double result = 0;
-            for (var i = Math.Pow(10, 8); i >= 0; i--)
-            {
-                result += Math.Atan(i) * Math.Tan(i);
-            }
+            Thread.Sleep(1500);
         }
     }
 }
