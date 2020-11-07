@@ -105,7 +105,7 @@ namespace AwesomeApp.Controllers
         private void DoCompute()
         {
             double result = 0;
-            for (var i = Math.Pow(4, 8); i >= 0; i--)
+            for (var i = Math.Pow(6, 8); i >= 0; i--)
             {
                 result += Math.Atan(i) * Math.Tan(i);
             }
