@@ -62,6 +62,9 @@ namespace AwesomeApp.Controllers
         {
             try
             {
+
+                this.DoCompute();
+
                 List<StudentEntity> lResults = new List<StudentEntity>();
 
                 QueryDefinition queryDefinition = new QueryDefinition($"select * from Students");
@@ -99,16 +102,13 @@ namespace AwesomeApp.Controllers
             await _myDb.UpsertItemAsync(lStudent);
         }
 
-        // PUT: api/Student/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        private void DoCompute()
         {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            double result = 0;
+            for (var i = Math.Pow(4, 8); i >= 0; i--)
+            {
+                result += Math.Atan(i) * Math.Tan(i);
+            }
         }
     }
 }
